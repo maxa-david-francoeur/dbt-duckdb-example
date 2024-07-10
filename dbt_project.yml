@@ -1,0 +1,31 @@
+name: 'duckdbexploration'
+version: '0.1.0'
+config-version: 2
+
+profile: 'duckdb-exploration'
+
+macro-paths:
+  - "macros"
+
+clean-targets:
+  - dbt_packages
+  - logs
+  - targetdyc
+models:
+  +copy_grants: true
+
+  duckdb-exploration:
+    +persist_docs:
+      relation: true
+      columns: true
+    stage:
+      +materialized: view
+    bindings:
+      +materialized: table
+    stream:
+      +materialized: table
+    marts:
+      +materialized: table
+
+vars:
+  dbt_date:time_zone: "America/Montreal"

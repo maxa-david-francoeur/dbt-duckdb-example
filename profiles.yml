@@ -1,0 +1,10 @@
+duckdb-exploration:
+  outputs:
+    default:
+      type: duckdb
+      path: ./tpchsf1-result.duckdb
+      attach:
+        - path: ./tpchsf1.duckdb
+      extensions:
+        - json
+      

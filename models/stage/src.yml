@@ -1,0 +1,15 @@
+version: 2
+
+sources:
+
+  - name: tpch_sf1
+    description: |
+      Snowflake sample data base
+    database: tpchsf1 # attached in profiles.yml
+    schema: main
+
+    tables:
+      - name: orders
+      - name: lineitem
+      - name: part
+      - name: partsupp

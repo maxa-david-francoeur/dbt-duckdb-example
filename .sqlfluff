@@ -1,0 +1,40 @@
+[sqlfluff]
+dialect = snowflake
+templater = dbt
+exclude_rules = L031,L032,L034,L035,LT01
+max_line_length = 170
+
+[sqlfluff:rules]
+single_table_references = consistent
+
+[sqlfluff:layout:type:comma]
+line_position = trailing
+
+[sqlfluff:indentation]
+indent_unit = space
+tab_space_size = 4
+indented_joins = False
+indented_ctes = False
+
+[sqlfluff:capitalisation.keywords]
+# consistent by default
+capitalisation_policy = lower
+
+[sqlfluff:rules:capitalisation.identifiers]
+extended_capitalisation_policy = lower
+
+[sqlfluff:rules:references.keywords]
+ignore_words = account
+
+[sqlfluff:rules:capitalisation.functions]
+extended_capitalisation_policy = lower
+
+[sqlfluff:rules:capitalisation.literals]
+capitalisation_policy = lower
+
+[sqlfluff:rules:ambiguous.join]
+# inner by default
+fully_qualify_join_type = both
+
+[sqlfluff:rules:ambiguous.column_references]
+group_by_and_order_by_style = explicit

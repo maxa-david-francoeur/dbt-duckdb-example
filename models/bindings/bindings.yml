@@ -1,0 +1,11 @@
+version : 2 
+
+models: 
+  - name: activity_line_item_created
+    columns:
+      - name: row_id
+        tests: 
+          - unique 
+          - not_null
+          # - accepted_values:
+          #     values: ['please-fail']

@@ -1,0 +1,9 @@
+version: 2 
+models: 
+  - name: order_stream
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - row_id
+            - activity_id
+            - activity_source
