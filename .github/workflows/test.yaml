@@ -1,0 +1,36 @@
+name: Tests
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Python
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: '.python-version'
+      - name: Install dependencies
+        run: |
+          pip install dbt-core
+          pip install -r requirements.txt
+          dbt deps
+      - name: Install duckdb
+        env:
+          DUCKDB_VERSION: "v1.0.0"
+        run: |
+          mkdir duckdb-download && cd duckdb-download
+          wget "https://github.com/duckdb/duckdb/releases/download/${DUCKDB_VERSION}/duckdb_cli-linux-amd64.zip"
+          unzip duckdb_cli-linux-amd64.zip
+          mkdir /opt/duckdb && mv duckdb /opt/duckdb && chmod +x /opt/duckdb/duckdb && sudo ln -s /opt/duckdb/duckdb /usr/bin/duckdb
+          duckdb --version
+      - name: Create TPCH database
+        run: |
+          duckdb tpchsf1.duckdb -c '.read reload-data.sql'
+      - name: Run dbt
+        run: dbt build

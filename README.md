@@ -25,7 +25,7 @@ Then we can create the source database. We'll be using DuckDB again but you coul
 Launch `duckdb` and load the `reload-data.sql` file, this will create the TPCH database with a scale factor of 1.
 
 ```bash
-duckdb dbt-duck.duckdb
+duckdb tpchsf1.duckdb
 .read reload-data.sql
 ```
 
